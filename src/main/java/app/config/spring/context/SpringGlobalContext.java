@@ -30,6 +30,7 @@ import javax.sql.DataSource;
 public class SpringGlobalContext
 {
 
+    // @formatter:off
     // Data source variables
     private @Value("${jdbc.driverClassName}") String driverName;
     private @Value("${jdbc.url}") String url;
@@ -39,6 +40,8 @@ public class SpringGlobalContext
     // hibernate variables
     private @Value("${hibernate.dialect}") String hibernateDialect;
     private @Value("${hibernate.show_sql}") String hibernateShowSql;
+    // @formatter:on
+
 
     @Bean
     public DataSource dataSourceBean()

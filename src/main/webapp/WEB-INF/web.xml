@@ -13,7 +13,7 @@
     </context-param>
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>app.config.spring.context.SpringGlobalContext</param-value>
+        <param-value>app.config.spring.context,app.config.spring.security</param-value>
     </context-param>
     <servlet>
         <servlet-name>springDispatcherServlet</servlet-name>
@@ -29,7 +29,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>springDispatcherServlet</servlet-name>
-        <url-pattern>/web</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
     <display-name>Archetype Created Web Application</display-name>
 </web-app>
