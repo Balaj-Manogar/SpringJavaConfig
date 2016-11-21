@@ -10,11 +10,11 @@ import java.sql.Timestamp;
 public class Employee
 {
     @JsonProperty("id")
-    private int employeeId;
+    private  int employeeId;
     @JsonProperty("name")
     private String employeeName;
     private Timestamp joinedDate;
-
+    private  long var;
     public int getEmployeeId()
     {
         return employeeId;

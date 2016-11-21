@@ -34,7 +34,7 @@ public class JavaFunctionsWithDbDemo<T> implements IGeneric<T>
         Supplier<Employee> inputObject = () ->
         {
             Employee e = new Employee();
-            e.setEmployeeId(123);
+            //e.setEmployeeId(123);
             e.setEmployeeName("Balaji");
             return e;
         };
@@ -63,7 +63,7 @@ public class JavaFunctionsWithDbDemo<T> implements IGeneric<T>
         {
 
             e = new Employee();
-            e.setEmployeeId(i);
+            //e.setEmployeeId(i);
             es.add(e);
         }
 
