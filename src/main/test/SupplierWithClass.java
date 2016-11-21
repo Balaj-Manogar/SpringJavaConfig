@@ -1,6 +1,7 @@
 import java.util.function.Supplier;
 
-public class Main {
+public class SupplierWithClass
+{
 
     static <T> T use(Supplier<T> obj)
     {
@@ -9,7 +10,7 @@ public class Main {
     }
     public static void main(String[] args) {
         System.out.println("Hello World!" + use(() -> new Person()));
-        System.out.println("Hello World!" + use(() -> new Employee()));
+        System.out.println("Hello World!" + use(() -> new Employee2()));
     }
 }
 
@@ -25,7 +26,8 @@ class Person {
     }
 }
 
-class Employee{
+class Employee2
+{
     String name = "Emp";
 
     @Override

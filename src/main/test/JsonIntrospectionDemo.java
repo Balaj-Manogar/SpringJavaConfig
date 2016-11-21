@@ -1,13 +1,12 @@
-package demo.pagination.tests;
-
-import java.lang.reflect.Method;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.BeanDescription;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.introspect.BeanPropertyDefinition;
+
+import java.lang.reflect.Method;
+import java.util.List;
 
 public class JsonIntrospectionDemo {
 
@@ -17,14 +16,20 @@ public class JsonIntrospectionDemo {
 		BeanDescription introspection = mapper.getSerializationConfig().introspect(userType);
 		List<BeanPropertyDefinition> properties = introspection.findProperties();
 		properties.forEach((b) -> System.out.println(b ));
-		properties.forEach((b) -> System.out.println("Annotated Field: " + b.getField().getName() + " Annotated Name: " + b.getFullName().getSimpleName() 
-				+ " Setter name: " + b.getSetter().getName()  + " TYPE: " + b.getField().getRawType() + " Parameter Type: " + b.getSetter().getParameter(0).getRawType()));
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++");
+		properties.forEach((b) -> System.out.println("Annotated Field: " + b.getField().getName()
+                + " Annotated Name: " + b.getFullName().getSimpleName()
+				+ " Setter name: " + b.getSetter().getName()
+                + " TYPE: "+ b.getField().getRawType()
+                + " Parameter Type: " + b.getSetter().getParameter(0).getRawType()
+				+ " Setter Parameter Type: " + b.getSetter().getParameter(0).getRawType()
+		));
 
 		Employee e = new Employee();
 		
 		Method method = e.getClass().getMethod("setId", int.class);
 		
-		System.out.println(method);
+		//System.out.println(method);
 	}
 
 }
@@ -33,6 +38,8 @@ class Employee{
 	private int id;
 	@JsonProperty("desc")
 	private String description;
+
+	private transient String  inValidFied;
 	public int getId() {
 		return id;
 	}

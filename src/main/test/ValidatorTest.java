@@ -32,6 +32,12 @@ public class ValidatorTest
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<ValidatorTest>> constraints = validator
                 .validate(validatorTest);
+
+
+        /*
+         * constraints.size() > 0
+         * If violations size is greater than zero, it has errors
+        */
         for (ConstraintViolation<ValidatorTest> constraint : constraints)
         {
             System.out.println(constraint.getPropertyPath() + " :::: " + constraint.getMessage());
