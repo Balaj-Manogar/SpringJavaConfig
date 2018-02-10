@@ -26,7 +26,7 @@ public class CollectionStreamDemo
         employees.stream()
                 .map(employee -> employee.getName())
                 .anyMatch(name -> {
-                    return name.toLowerCase().contains("alo");
+                    return name.toLowerCase().contains("ya");
                 })
         );
     }
