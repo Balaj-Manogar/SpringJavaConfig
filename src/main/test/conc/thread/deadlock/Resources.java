@@ -1,16 +1,17 @@
 package conc.thread.deadlock;
 
-class Car
+class Key
 {
-    public void purchase()
+    public void pick()
     {
-        System.out.println("Car is driving by " + Thread.currentThread().getName());
+        System.out.println("Key is driving by " + Thread.currentThread().getName());
     }
 }
 
-class License {
-    public void apply()
+class Car
+{
+    public void drive()
     {
-        System.out.println("License applied by " + Thread.currentThread().getName());
+        System.out.println("Car applied by " + Thread.currentThread().getName());
     }
 }

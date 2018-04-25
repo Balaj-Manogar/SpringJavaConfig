@@ -2,13 +2,13 @@ package conc.thread.deadlock;
 
 class Task_1 implements Runnable
 {
+    private Key key;
     private Car car;
-    private License license;
 
-    public Task_1(Car car, License license)
+    public Task_1(Key key, Car car)
     {
+        this.key = key;
         this.car = car;
-        this.license = license;
     }
 
 
@@ -17,13 +17,13 @@ class Task_1 implements Runnable
     public void run()
     {
         System.out.println("Task_1 will acquire its resources now");
-        synchronized (car)
+        synchronized (key)
         {
             sleep();
-            synchronized (license)
+            synchronized (car)
             {
-                car.purchase();
-                license.apply();
+                key.pick();
+                car.drive();
             }
         }
     }
@@ -43,13 +43,13 @@ class Task_1 implements Runnable
 
 class Task_2 implements Runnable
 {
+    private Key key;
     private Car car;
-    private License license;
 
-    public Task_2(Car car, License license)
+    public Task_2(Key key, Car car)
     {
+        this.key = key;
         this.car = car;
-        this.license = license;
     }
 
 
@@ -58,13 +58,13 @@ class Task_2 implements Runnable
     public void run()
     {
         System.out.println("Task_2 will acquire its resources now");
-        synchronized (license)
+        synchronized (car)
         {
             sleep();
-            synchronized (car)
+            synchronized (key)
             {
-                license.apply();
-                car.purchase();
+                key.pick();
+                car.drive();
             }
         }
     }
