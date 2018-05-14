@@ -10,8 +10,6 @@ import java.util.concurrent.CountDownLatch;
  * notify using CountDownLatch. Consumer will wait
  * till the lock becomes zero. Disadvantage is we cannot
  * reuse this latch.
- *
- *
  */
 class ProducerConsumerWaitAndNotifyUsingLatch
 {
@@ -26,10 +24,10 @@ class ProducerConsumerWaitAndNotifyUsingLatch
     public static void main(String[] args) throws InterruptedException
     {
         System.out.println("Program Started...");
-        CountDownLatch latch = new CountDownLatch(1);
+        CountDownLatch latch = new CountDownLatch(3);
         ProducerConsumerWaitAndNotifyUsingLatch producerConsumer = new ProducerConsumerWaitAndNotifyUsingLatch(latch);
 
-        Thread producer = new Thread(() -> {
+        Runnable producerRunnable = () -> {
             System.out.println("Producer thread started..");
             try
             {
@@ -40,10 +38,13 @@ class ProducerConsumerWaitAndNotifyUsingLatch
             {
                 e.printStackTrace();
             }
-        }, "Producer");
+        };
+        Thread producer1 = new Thread(producerRunnable, "Producer1");
+        Thread producer2 = new Thread(producerRunnable, "Producer2");
+        Thread producer3 = new Thread(producerRunnable, "Producer3");
 
         Thread consumer = new Thread(() -> {
-            System.out.println("Consumer thread started..");
+            System.out.println("Consumer Thread started..");
             try
             {
                 producerConsumer.consume();
@@ -54,10 +55,14 @@ class ProducerConsumerWaitAndNotifyUsingLatch
             }
         }, "Consumer");
 
-        producer.start();
+        producer1.start();
+        producer2.start();
+        producer3.start();
         consumer.start();
 
-        producer.join();
+        producer1.join();
+        producer2.join();
+        producer3.join();
         consumer.join();
 
     }
@@ -66,9 +71,10 @@ class ProducerConsumerWaitAndNotifyUsingLatch
     {
         Random random = new Random();
 
-        latch.countDown();
+
         synchronized (this)
         {
+            latch.countDown();
             System.out.println("Pro Job size: " + jobs.size());
 
             String job = "Job " + random.nextInt(100);
@@ -87,12 +93,11 @@ class ProducerConsumerWaitAndNotifyUsingLatch
         synchronized (this)
         {
             System.out.println("Cons Job size: " + jobs.size());
-            if (jobs.size() > 0)
-            {
-                String removedJob = jobs.remove(0);
-                System.out.println("Removed Job: " + removedJob);
-                Thread.sleep(1000);
-            }
+
+            String removedJob = jobs.remove(0);
+            System.out.println("Removed Job: " + removedJob);
+            //Thread.sleep(1000);
+
         }
     }
 }
